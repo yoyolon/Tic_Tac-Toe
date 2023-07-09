@@ -70,6 +70,36 @@ func TestPutToken_22_o(t *testing.T) {
 	}
 }
 
+// (0,0)-(2,2)に順番に"o"を置くテスト
+func TestPutToken_o(t *testing.T) {
+	b := &Board{
+		tokens: []int{0, 0, 0, 0, 0, 0, 0, 0, 0},
+	}
+	for i := 0; i < 3; i++ {
+		for j := 0; j < 3; j++ {
+			b.Put(i, j, "o")
+			if b.Get(i, j) != "o" {
+				t.Errorf("Failed to put \"o\" on (%d,%d)", i, j)
+			}
+		}
+	}
+}
+
+// (0,0)-(2,2)に順番に"x"を置くテスト
+func TestPutToken_x(t *testing.T) {
+	b := &Board{
+		tokens: []int{0, 0, 0, 0, 0, 0, 0, 0, 0},
+	}
+	for i := 0; i < 3; i++ {
+		for j := 0; j < 3; j++ {
+			b.Put(i, j, "x")
+			if b.Get(i, j) != "x" {
+				t.Errorf("Failed to put \"x\" on (%d,%d)", i, j)
+			}
+		}
+	}
+}
+
 // 駒の存在しない座標は"."を返すテスト
 func TestGetToken_empty(t *testing.T) {
 	b := &Board{
