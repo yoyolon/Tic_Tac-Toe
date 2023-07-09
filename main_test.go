@@ -69,3 +69,17 @@ func TestPutToken_22_o(t *testing.T) {
 		t.Errorf("....")
 	}
 }
+
+// 駒の存在しない座標は"."を返すテスト
+func TestGetToken_empty(t *testing.T) {
+	b := &Board{
+		tokens: []int{0, 0, 0, 0, 0, 0, 0, 0, 0},
+	}
+	for i := 0; i < 3; i++ {
+		for j := 0; j < 3; j++ {
+			if b.Get(i, j) != "." {
+				t.Errorf("....")
+			}
+		}
+	}
+}
