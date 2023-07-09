@@ -130,6 +130,7 @@ func TestPutToken_not_overwrite(t *testing.T) {
 	}
 }
 
+// 勝敗判定: 勝者なし
 // 無地の盤面では勝敗が存在しない
 func TestCheckWin_empty(t *testing.T) {
 	b := &Board{
@@ -140,5 +141,84 @@ func TestCheckWin_empty(t *testing.T) {
 	}
 	if b.CheckWin() != 0 {
 		t.Errorf("This case is not a winner.")
+	}
+}
+
+// 引き分け01
+func TestCheckWin_draw_01(t *testing.T) {
+	b := &Board{
+		tokens: []int{
+			1, 2, 1,
+			1, 2, 2,
+			2, 1, 1},
+	}
+	if b.CheckWin() != 0 {
+		t.Errorf("This case is not a winner.")
+	}
+}
+
+// 引き分け02(player1がリーチ)
+func TestCheckWin_draw_02(t *testing.T) {
+	b := &Board{
+		tokens: []int{
+			1, 1, 0,
+			0, 1, 1,
+			1, 0, 0},
+	}
+	if b.CheckWin() != 0 {
+		t.Errorf("This case is not a winner.")
+	}
+}
+
+// 引き分け03(player2がリーチ)
+func TestCheckWin_draw_03(t *testing.T) {
+	b := &Board{
+		tokens: []int{
+			0, 2, 2,
+			2, 0, 2,
+			2, 2, 0},
+	}
+	if b.CheckWin() != 0 {
+		t.Errorf("This case is not a winner.")
+	}
+}
+
+// 勝敗判定: プレイヤー1が勝利するケース
+// プレイヤー1が勝利(縦)
+func TestCheckWin_player1_win_01(t *testing.T) {
+	b := &Board{
+		tokens: []int{
+			1, 0, 0,
+			1, 0, 0,
+			1, 0, 0},
+	}
+	if b.CheckWin() != 1 {
+		t.Errorf("Player1 should be winner.")
+	}
+}
+
+// プレイヤー1が勝利(横)
+func TestCheckWin_player1_win_02(t *testing.T) {
+	b := &Board{
+		tokens: []int{
+			0, 0, 0,
+			1, 1, 1,
+			0, 0, 0},
+	}
+	if b.CheckWin() != 1 {
+		t.Errorf("Player1 should be winner.")
+	}
+}
+
+// プレイヤー1が勝利(斜め)
+func TestCheckWin_player1_win_03(t *testing.T) {
+	b := &Board{
+		tokens: []int{
+			1, 0, 0,
+			0, 1, 0,
+			0, 0, 1},
+	}
+	if b.CheckWin() != 1 {
+		t.Errorf("Player1 should be winner.")
 	}
 }
