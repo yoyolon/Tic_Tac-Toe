@@ -222,3 +222,83 @@ func TestCheckWin_player1_win_03(t *testing.T) {
 		t.Errorf("Player1 should be winner.")
 	}
 }
+
+// 勝敗判定: プレイヤー2が勝利するケース
+// プレイヤー2が勝利(縦)
+func TestCheckWin_player2_win_01(t *testing.T) {
+	b := &Board{
+		tokens: []int{
+			0, 0, 2,
+			0, 0, 2,
+			0, 0, 2},
+	}
+	if b.CheckWin() != 2 {
+		t.Errorf("Player2 should be winner.")
+	}
+}
+
+// プレイヤー2が勝利(横)
+func TestCheckWin_player2_win_02(t *testing.T) {
+	b := &Board{
+		tokens: []int{
+			0, 0, 0,
+			0, 0, 0,
+			2, 2, 2},
+	}
+	if b.CheckWin() != 2 {
+		t.Errorf("Player2 should be winner.")
+	}
+}
+
+// プレイヤー2が勝利(斜め)
+func TestCheckWin_player2_win_03(t *testing.T) {
+	b := &Board{
+		tokens: []int{
+			0, 0, 2,
+			0, 2, 0,
+			2, 0, 0},
+	}
+	if b.CheckWin() != 2 {
+		t.Errorf("Player2 should be winner.")
+	}
+}
+
+// 勝敗判定: 自作のケース
+// player1が勝利
+func TestCheckWin_random_01(t *testing.T) {
+	b := &Board{
+		tokens: []int{
+			1, 1, 1,
+			2, 1, 0,
+			2, 0, 2},
+	}
+	if b.CheckWin() != 1 {
+		t.Errorf("Player1 should be winner.")
+	}
+}
+
+// 引き分け
+func TestCheckWin_random_02(t *testing.T) {
+	b := &Board{
+		tokens: []int{
+			1, 1, 2,
+			2, 2, 1,
+			1, 2, 0},
+	}
+	if b.CheckWin() != 0 {
+		t.Errorf("This case is not a winner.")
+	}
+}
+
+// player2が勝利
+func TestCheckWin_random_03(t *testing.T) {
+	b := &Board{
+		tokens: []int{
+			1, 0, 1,
+			2, 2, 2,
+			0, 0, 1},
+	}
+	if b.CheckWin() != 2 {
+		t.Errorf("Player2 should be winner.")
+	}
+}
