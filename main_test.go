@@ -83,3 +83,19 @@ func TestGetToken_empty(t *testing.T) {
 		}
 	}
 }
+
+// 既に駒が存在する箇所には駒を配置できないテスト
+func TestPutToken_not_overwrite(t *testing.T) {
+	b := &Board{
+		tokens: []int{0, 0, 0, 0, 0, 0, 0, 0, 0},
+	}
+	for i := 0; i < 3; i++ {
+		for j := 0; j < 3; j++ {
+			b.Put(i, j, "o")
+			b.Put(i, j, "x") // 駒は上書き不可能
+			if b.Get(i, j) != "o" {
+				t.Errorf("....")
+			}
+		}
+	}
+}
